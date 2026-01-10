@@ -1,170 +1,62 @@
-SUMMARY
-================================================================================
+### 🎬영화 추천 시스템 (AutoIntMLP)
 
-These files contain 1,000,209 anonymous ratings of approximately 3,900 movies 
-made by 6,040 MovieLens users who joined MovieLens in 2000.
+---
+### 📌목적
+사용자, 영화, 장르, 시간 정보 간의  
+복합적인 상호작용을 학습하여  
+개인화된 영화 추천 성능을 향상시키는 추천 시스템을 구현한다.
 
-USAGE LICENSE
-================================================================================
+---
+### 📂사용 데이터
+- MovieLens 1M Dataset
+- users.dat / movies.dat / ratings.dat
+---
+### 🔍주요 전처리
+- 영화 연도 및 년대 추출
+- 장르 분리 (genre1~3)
+- 평점 timestamp 기반 시간 피처 생성
+- 평점 이진화 (선호/비선호)
+- LabelEncoder 기반 범주형 인코딩
+---
+### 🧠모델
+- AutoInt (Automatic Feature Interaction)
+- AutoInt + MLP 결합 모델 (AutoIntMLP)
+---
+### 📊평가 지표
+- NDCG (Normalized Discounted Cumulative Gain)
+- Hit Rate
+---
+### 📈결과
+AutoIntMLP 모델은  
+기존 단순 MLP 대비 피처 간 상호작용을 효과적으로 학습하여  
+추천 성능 향상을 보였으며,  
+Streamlit 기반 웹 애플리케이션을 통해  
+실제 서비스 형태의 추천 시스템을 구현하였다.
 
-Neither the University of Minnesota nor any of the researchers
-involved can guarantee the correctness of the data, its suitability
-for any particular purpose, or the validity of results based on the
-use of the data set.  The data set may be used for any research
-purposes under the following conditions:
+---
 
-     * The user may not state or imply any endorsement from the
-       University of Minnesota or the GroupLens Research Group.
+## 🖼 Streamlit 실행 화면
 
-     * The user must acknowledge the use of the data set in
-       publications resulting from the use of the data set
-       (see below for citation information).
+본 프로젝트에서는 학습된 AutoIntMLP 모델을 활용하여  
+사용자에게 개인화된 영화 추천을 제공하는  
+**Streamlit 기반 웹 애플리케이션**을 구현하였습니다.
 
-     * The user may not redistribute the data without separate
-       permission.
+### 주요 기능
 
-     * The user may not use this information for any commercial or
-       revenue-bearing purposes without first obtaining permission
-       from a faculty member of the GroupLens Research Project at the
-       University of Minnesota.
+- 사용자 ID 입력 (MovieLens 1~6040)
+- 추천 받을 영화 개수 선택
+- 이미 시청한 영화 자동 제외
+- AutoIntMLP 예측 점수 기반 추천
+- 추천 결과 테이블 출력
 
-If you have any further questions or comments, please contact GroupLens
-<grouplens-info@cs.umn.edu>. 
+### 실행 화면 예시
 
-CITATION
-================================================================================
-
-To acknowledge use of the dataset in publications, please cite the following
-paper:
-
-F. Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens Datasets: History
-and Context. ACM Transactions on Interactive Intelligent Systems (TiiS) 5, 4,
-Article 19 (December 2015), 19 pages. DOI=http://dx.doi.org/10.1145/2827872
+> 아래는 Streamlit 앱 실행 화면 예시입니다.
+<img width="946" height="426" alt="스크린샷 2026-01-10 171846" src="https://github.com/user-attachments/assets/c5d7c061-83e3-4242-b603-07c46707e124" />
+<img width="954" height="652" alt="스크린샷 2026-01-10 171924" src="https://github.com/user-attachments/assets/c64e7566-cc09-4049-8963-4d70240281de" />
 
 
-ACKNOWLEDGEMENTS
-================================================================================
+### 실행 방법
 
-Thanks to Shyong Lam and Jon Herlocker for cleaning up and generating the data
-set.
-
-FURTHER INFORMATION ABOUT THE GROUPLENS RESEARCH PROJECT
-================================================================================
-
-The GroupLens Research Project is a research group in the Department of 
-Computer Science and Engineering at the University of Minnesota. Members of 
-the GroupLens Research Project are involved in many research projects related 
-to the fields of information filtering, collaborative filtering, and 
-recommender systems. The project is lead by professors John Riedl and Joseph 
-Konstan. The project began to explore automated collaborative filtering in 
-1992, but is most well known for its world wide trial of an automated 
-collaborative filtering system for Usenet news in 1996. Since then the project 
-has expanded its scope to research overall information filtering solutions, 
-integrating in content-based methods as well as improving current collaborative 
-filtering technology.
-
-Further information on the GroupLens Research project, including research 
-publications, can be found at the following web site:
-        
-        http://www.grouplens.org/
-
-GroupLens Research currently operates a movie recommender based on 
-collaborative filtering:
-
-        http://www.movielens.org/
-
-RATINGS FILE DESCRIPTION
-================================================================================
-
-All ratings are contained in the file "ratings.dat" and are in the
-following format:
-
-UserID::MovieID::Rating::Timestamp
-
-- UserIDs range between 1 and 6040 
-- MovieIDs range between 1 and 3952
-- Ratings are made on a 5-star scale (whole-star ratings only)
-- Timestamp is represented in seconds since the epoch as returned by time(2)
-- Each user has at least 20 ratings
-
-USERS FILE DESCRIPTION
-================================================================================
-
-User information is in the file "users.dat" and is in the following
-format:
-
-UserID::Gender::Age::Occupation::Zip-code
-
-All demographic information is provided voluntarily by the users and is
-not checked for accuracy.  Only users who have provided some demographic
-information are included in this data set.
-
-- Gender is denoted by a "M" for male and "F" for female
-- Age is chosen from the following ranges:
-
-	*  1:  "Under 18"
-	* 18:  "18-24"
-	* 25:  "25-34"
-	* 35:  "35-44"
-	* 45:  "45-49"
-	* 50:  "50-55"
-	* 56:  "56+"
-
-- Occupation is chosen from the following choices:
-
-	*  0:  "other" or not specified
-	*  1:  "academic/educator"
-	*  2:  "artist"
-	*  3:  "clerical/admin"
-	*  4:  "college/grad student"
-	*  5:  "customer service"
-	*  6:  "doctor/health care"
-	*  7:  "executive/managerial"
-	*  8:  "farmer"
-	*  9:  "homemaker"
-	* 10:  "K-12 student"
-	* 11:  "lawyer"
-	* 12:  "programmer"
-	* 13:  "retired"
-	* 14:  "sales/marketing"
-	* 15:  "scientist"
-	* 16:  "self-employed"
-	* 17:  "technician/engineer"
-	* 18:  "tradesman/craftsman"
-	* 19:  "unemployed"
-	* 20:  "writer"
-
-MOVIES FILE DESCRIPTION
-================================================================================
-
-Movie information is in the file "movies.dat" and is in the following
-format:
-
-MovieID::Title::Genres
-
-- Titles are identical to titles provided by the IMDB (including
-year of release)
-- Genres are pipe-separated and are selected from the following genres:
-
-	* Action
-	* Adventure
-	* Animation
-	* Children's
-	* Comedy
-	* Crime
-	* Documentary
-	* Drama
-	* Fantasy
-	* Film-Noir
-	* Horror
-	* Musical
-	* Mystery
-	* Romance
-	* Sci-Fi
-	* Thriller
-	* War
-	* Western
-
-- Some MovieIDs do not correspond to a movie due to accidental duplicate
-entries and/or test entries
-- Movies are mostly entered by hand, so errors and inconsistencies may exist
+```bash
+streamlit run show_st_plus.py
