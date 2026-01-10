@@ -28,9 +28,11 @@
 ---
 ### 📈결과
 AutoIntMLP 모델은  
-기존 단순 MLP 대비 피처 간 상호작용을 효과적으로 학습하여  
-추천 성능 향상을 보였으며,  
-Streamlit 기반 웹 애플리케이션을 통해  
+첫번째 AutoIntMLP 모델은 기존 AutoInt 모델보다 성능이 떨어졌다..
+두번째 AutoIntMLP는 첫번째 AutoIntMLP보다 성능은 향상되었으나,
+기존 AutoInt 모델과 같은 성능으로 마무리 했다..
+하지만 AutoIntMLP 모델을 통해 AutoInt 모델보다 더 보기 쉬운 
+Streamlit 기반 웹 애플케이션을 통해 
 실제 서비스 형태의 추천 시스템을 구현하였다.
 
 ---
